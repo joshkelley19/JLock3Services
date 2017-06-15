@@ -1,0 +1,9 @@
+applications:
+- name: jlock3
+  memory: 512Mb
+  instances: 1
+  path: target/JLock3-0.0.1-SNAPSHOT.jar
+  services:
+    - jlock3-entries
+
+#    file to configure cloudfoundry apps
