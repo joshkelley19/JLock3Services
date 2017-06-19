@@ -1,24 +1,20 @@
 package kelley.josh.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * Created by joshuakelley on 3/9/17.
  */
 @Entity
-@Table(name = "users")
 public class User {
-    String firstName;
-    String lastName;
-    String email;
-    String userName;
-    String password;
+    private String firstName;
+    private String lastName;
+    private String email;
+    private String userName;
+    private String password;
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     public User(String firstName, String lastName, String email, String userName, String password, long id) {
@@ -73,7 +69,11 @@ public class User {
         this.password = password;
     }
 
-    public long getId(){
+    public long getId() {
         return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 }

@@ -29,7 +29,7 @@ public class EntryController {
     @RequestMapping(value = "entry/add", method = RequestMethod.POST)
     public List<Entry> addEntry(@RequestBody Entry entry) {
         entryRepo.save(entry);
-        return entryRepo.findByClientAccountNumber(entry.clientAccountNumber);
+        return entryRepo.findByClientAccountNumber(entry.getClientAccountNumber());
     }
 
     @RequestMapping(value = "entry/{id}", method = RequestMethod.GET)
