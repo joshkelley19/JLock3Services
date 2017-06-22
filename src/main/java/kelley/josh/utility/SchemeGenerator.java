@@ -38,7 +38,7 @@ public class SchemeGenerator {
         return stringBuilder.toString();
     }
 
-    private List determineRandomPattern() {
+    public List<Character> determineRandomPattern() {
 //        add all possible scheme letters
         ArrayList<Character> charsList = new ArrayList<>();
         charsList.add(LETTER);
@@ -46,7 +46,7 @@ public class SchemeGenerator {
         charsList.add(ANYSYMBOL);
         char currentChar;
 
-        ArrayList scheme = new ArrayList();
+        ArrayList<Character> scheme = new ArrayList<Character>();
         for (int i = 0; i < passwordConfig.getLength(); ) {
             try {
 //                add random scheme letter to list
@@ -99,7 +99,8 @@ public class SchemeGenerator {
         return list;
     }
 
-    List addLetter(int amount, int listAmount, char character, boolean end) {
+//    creates and returns list filled with consecutive characters
+    public List<Character> addLetter(int amount, int listAmount, char character, boolean end) {
         List<Character> list = new ArrayList<Character>();
         if (amount == 0 && end) {
             amount = end ? listAmount : setAmount(listAmount);
@@ -110,7 +111,7 @@ public class SchemeGenerator {
         return list;
     }
 
-    int setAmount(int currentListAmount) {
+    public int setAmount(int currentListAmount) {
         return (int) Math.floor(Math.random() * (currentListAmount - 1)) + 1;
     }
 
