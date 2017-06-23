@@ -46,4 +46,11 @@ public class EntryController {
         return null;
     }
 
+    @RequestMapping(value = "entry/delete")
+    public List<Entry> deleteEntry(@RequestBody Entry entry) {
+        long id = entry.getId();
+        entryRepo.delete(entry);
+        return getEntries(id);
+    }
+
 }
