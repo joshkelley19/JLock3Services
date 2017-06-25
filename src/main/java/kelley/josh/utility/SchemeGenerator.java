@@ -39,12 +39,20 @@ public class SchemeGenerator {
     }
 
     public List<Character> determineRandomPattern() {
-//        add all possible scheme letters
+//        add all selected scheme letters
         ArrayList<Character> charsList = new ArrayList<>();
-        charsList.add(LETTER);
-        charsList.add(NUMBER);
-        charsList.add(ANYSYMBOL);
+        if (passwordConfig.getUpperCase().getAmount() >= 0) {
+            charsList.add(LETTER);
+        }
+        if (passwordConfig.getNumbers().getAmount() >= 0) {
+            charsList.add(NUMBER);
+        }
+        if (passwordConfig.getCharacters().getAmount() >= 0) {
+            charsList.add(ANYSYMBOL);
+        }
         char currentChar;
+
+//        todo throw custom exception if charsList.size() < 1
 
         ArrayList<Character> scheme = new ArrayList<Character>();
         for (int i = 0; i < passwordConfig.getLength(); ) {
@@ -92,14 +100,14 @@ public class SchemeGenerator {
         Set<Map.Entry<Integer, Character>> set = map.entrySet();
         int length = map.size();
 
-        for (Map.Entry e: set) {
-            list.addAll(addLetter((int)e.getKey(), passwordConfig.getLength() - list.size(),
-                    tempMap.remove((int)e.getKey()), map.size() == 1));
+        for (Map.Entry e : set) {
+            list.addAll(addLetter((int) e.getKey(), passwordConfig.getLength() - list.size(),
+                    tempMap.remove((int) e.getKey()), map.size() == 1));
         }
         return list;
     }
 
-//    creates and returns list filled with consecutive characters
+    //    creates and returns list filled with consecutive characters
     public List<Character> addLetter(int amount, int listAmount, char character, boolean end) {
         List<Character> list = new ArrayList<Character>();
         if (amount == 0 && end) {
