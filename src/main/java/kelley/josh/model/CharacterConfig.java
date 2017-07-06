@@ -4,19 +4,23 @@ package kelley.josh.model;
  * Created by joshuakelley on 6/17/17.
  */
 public class CharacterConfig {
-    public enum STATUS{
+    public enum STATUS {
         NONE("NONE"), ONEPLUS("ONEPLUS"), CUSTOM("CUSTOM");
 
-        STATUS(String str){
+        STATUS(String str) {
         }
     }
 
     public STATUS type;
     public int amount;
 
-    public CharacterConfig(int amount, String status){
+    public CharacterConfig(int amount, String status) {
         this.amount = amount;
         this.type = STATUS.valueOf(status);
+    }
+
+    public CharacterConfig() {
+
     }
 
     public STATUS getType() {

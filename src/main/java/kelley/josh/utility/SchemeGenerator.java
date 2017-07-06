@@ -41,6 +41,7 @@ public class SchemeGenerator {
     public List<Character> determineRandomPattern() {
 //        add all selected scheme letters
         ArrayList<Character> charsList = new ArrayList<>();
+        System.out.println(passwordConfig.toString());
         if (passwordConfig.getUpperCase().getAmount() >= 0) {
             charsList.add(LETTER);
         }

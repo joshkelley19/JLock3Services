@@ -7,6 +7,7 @@ import kelley.josh.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 /**
@@ -21,24 +22,30 @@ public class EntryController {
     @Autowired
     public UserRepository userRepo;
 
+
+    @RequestMapping("/user")
+    public Principal user(Principal user) {
+        return user;
+    }
+
     @RequestMapping(value = "user/{id}", method = RequestMethod.GET)
-    public User getUser(@PathVariable Long id) {
+    public @ResponseBody User getUser(@PathVariable Long id) {
         return userRepo.findOne(id);
     }
 
     @RequestMapping(value = "entry/add", method = RequestMethod.POST)
-    public List<Entry> addEntry(@RequestBody Entry entry) {
+    public @ResponseBody List<Entry> addEntry(@RequestBody Entry entry) {
         entryRepo.save(entry);
         return entryRepo.findByClientAccountNumber(entry.getClientAccountNumber());
     }
 
     @RequestMapping(value = "entry/{id}", method = RequestMethod.GET)
-    public List<Entry> getEntries(@PathVariable Long id) {
+    public @ResponseBody List<Entry> getEntries(@PathVariable Long id) {
         return entryRepo.findByClientAccountNumber(id);
     }
 
     @RequestMapping(value = "entry/edit", method = RequestMethod.PUT)
-    public List<Entry> editEntry(@RequestBody Entry entry) {
+    public @ResponseBody List<Entry> editEntry(@RequestBody Entry entry) {
         if (entryRepo.findOne(entry.getId()) != null) {
             entryRepo.save(entry);
             return entryRepo.findByClientAccountNumber(entry.getId());
@@ -46,8 +53,8 @@ public class EntryController {
         return null;
     }
 
-    @RequestMapping(value = "entry/delete")
-    public List<Entry> deleteEntry(@RequestBody Entry entry) {
+    @RequestMapping(value = "entry/delete", method = RequestMethod.DELETE)
+    public @ResponseBody List<Entry> deleteEntry(@RequestBody Entry entry) {
         long id = entry.getId();
         entryRepo.delete(entry);
         return getEntries(id);

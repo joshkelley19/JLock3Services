@@ -2,6 +2,7 @@ package kelley.josh.utilityTests;
 
 import static org.junit.Assert.*;
 
+import kelley.josh.model.CharacterConfig;
 import kelley.josh.model.PasswordConfig;
 import kelley.josh.utility.SchemeGenerator;
 import org.junit.Test;
@@ -66,7 +67,7 @@ public class SchemeGeneratorTests {
 
     @Test
     public void randomPatternTest() {
-        SchemeGenerator sg = new SchemeGenerator(new PasswordConfig(false, 20, true, null, null, null, null));
+        SchemeGenerator sg = new SchemeGenerator(new PasswordConfig(false, 20, true, new CharacterConfig(0, "NONE"), null, new CharacterConfig(0, "NONE"), new CharacterConfig(0, "NONE")));
         assertTrue("confirm scheme returned has specific characters within range", testRandomPattern(sg.determineRandomPattern()));
     }
 
