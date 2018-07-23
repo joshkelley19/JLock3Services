@@ -5,5 +5,7 @@ applications:
   path: ./target/JLock3-0.0.1-SNAPSHOT.jar
   services:
     - jlock3-entries
+  env:
+    spring.profiles.active: prod
 
 #    file to configure cloudfoundry apps

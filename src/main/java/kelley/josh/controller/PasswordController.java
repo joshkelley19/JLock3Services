@@ -13,7 +13,7 @@ public class PasswordController {
 //    todo make api call to password randomizer via service
 
     @CrossOrigin
-    @RequestMapping(value = "/any", method = RequestMethod.POST)
+    @RequestMapping(value = "/randomizer", method = RequestMethod.POST)
     public String randomize(@RequestBody PasswordConfig passwordConfig) {
         RestTemplate restTemplate = new RestTemplate();
         String scheme = new SchemeGenerator(passwordConfig).randomizeScheme();

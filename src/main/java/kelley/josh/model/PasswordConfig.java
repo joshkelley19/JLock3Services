@@ -5,35 +5,20 @@ package kelley.josh.model;
  */
 public class PasswordConfig {
 //    todo overload method differentiating between fully random and specifics added
-    private boolean custom;
     private int length;
-    private CharacterConfig upperCase;
-    private CharacterConfig lowerCase;
-    private CharacterConfig numbers;
-    private CharacterConfig characters;
-    private boolean charStandard;
+    private boolean symbols;
+    private boolean numbers;
+    private boolean letters;
 
-    public PasswordConfig(boolean custom, int length, boolean charStandard, CharacterConfig upperCase,
-                          CharacterConfig lowerCase, CharacterConfig numbers, CharacterConfig characters){
-        this.custom = custom;
+    public PasswordConfig(int length, boolean symbols, boolean numbers, boolean letters) {
+
         this.length = length;
-        this.charStandard = charStandard;
-        this.upperCase = upperCase;
-        this.lowerCase = lowerCase;
+        this.symbols = symbols;
         this.numbers = numbers;
-        this.characters = characters;
+        this.letters = letters;
     }
 
-    public PasswordConfig(){
-
-    }
-
-    public boolean isCustom() {
-        return custom;
-    }
-
-    public void setCustom(boolean custom) {
-        this.custom = custom;
+    public PasswordConfig() {
     }
 
     public int getLength() {
@@ -44,43 +29,27 @@ public class PasswordConfig {
         this.length = length;
     }
 
-    public CharacterConfig getUpperCase() {
-        return upperCase;
+    public boolean isSymbols() {
+        return symbols;
     }
 
-    public void setUpperCase(CharacterConfig upperCase) {
-        this.upperCase = upperCase;
+    public void setSymbols(boolean symbols) {
+        this.symbols = symbols;
     }
 
-    public CharacterConfig getLowerCase() {
-        return lowerCase;
-    }
-
-    public void setLowerCase(CharacterConfig lowerCase) {
-        this.lowerCase = lowerCase;
-    }
-
-    public CharacterConfig getNumbers() {
+    public boolean isNumbers() {
         return numbers;
     }
 
-    public void setNumbers(CharacterConfig numbers) {
+    public void setNumbers(boolean numbers) {
         this.numbers = numbers;
     }
 
-    public CharacterConfig getCharacters() {
-        return characters;
+    public boolean isLetters() {
+        return letters;
     }
 
-    public void setCharacters(CharacterConfig characters) {
-        this.characters = characters;
-    }
-
-    public boolean isCharStandard() {
-        return charStandard;
-    }
-
-    public void setCharStandard(boolean charStandard) {
-        this.charStandard = charStandard;
+    public void setLetters(boolean letters) {
+        this.letters = letters;
     }
 }

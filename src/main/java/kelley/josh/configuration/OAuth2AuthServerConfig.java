@@ -1,5 +1,6 @@
 package kelley.josh.configuration;
 
+import kelley.josh.services.MyUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,6 +19,9 @@ public class OAuth2AuthServerConfig extends AuthorizationServerConfigurerAdapter
     @Autowired
     private AuthenticationManager authenticationManager;
 
+    @Autowired
+    private MyUserDetailsService myUserDetailsService;
+
     @Override
     public void configure(AuthorizationServerSecurityConfigurer oauthServer) throws Exception {
         oauthServer
@@ -32,7 +36,7 @@ public class OAuth2AuthServerConfig extends AuthorizationServerConfigurerAdapter
         clients.inMemory()
                 .withClient("josh")
                 .secret("joshsecret")
-                .authorizedGrantTypes("password")
+                .authorizedGrantTypes("password", "refresh_token")
                 .scopes("read", "write")
                 .authorities("USER")
                 .accessTokenValiditySeconds(600);
@@ -56,6 +60,7 @@ public class OAuth2AuthServerConfig extends AuthorizationServerConfigurerAdapter
 
         endpoints
                 .tokenStore(tokenStore())
+                .userDetailsService(myUserDetailsService)
                 .authenticationManager(authenticationManager);
     }
 

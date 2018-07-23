@@ -67,7 +67,7 @@ public class SchemeGeneratorTests {
 
     @Test
     public void randomPatternTest() {
-        SchemeGenerator sg = new SchemeGenerator(new PasswordConfig(false, 20, true, new CharacterConfig(0, "NONE"), null, new CharacterConfig(0, "NONE"), new CharacterConfig(0, "NONE")));
+        SchemeGenerator sg = new SchemeGenerator(new PasswordConfig(10, true, true, true));
         assertTrue("confirm scheme returned has specific characters within range", testRandomPattern(sg.determineRandomPattern()));
     }
 

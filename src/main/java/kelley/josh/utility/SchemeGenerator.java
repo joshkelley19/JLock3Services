@@ -23,8 +23,7 @@ public class SchemeGenerator {
     }
 
     public String randomizeScheme() {
-        List list = passwordConfig.isCustom() ? determineCustomPattern() : determineRandomPattern();
-
+        List list = /*passwordConfig.isCustom() ? determineCustomPattern() :*/ determineRandomPattern();
         return createScheme(list);
     }
 
@@ -42,13 +41,13 @@ public class SchemeGenerator {
 //        add all selected scheme letters
         ArrayList<Character> charsList = new ArrayList<>();
         System.out.println(passwordConfig.toString());
-        if (passwordConfig.getUpperCase().getAmount() >= 0) {
+        if (passwordConfig.isLetters()) {
             charsList.add(LETTER);
         }
-        if (passwordConfig.getNumbers().getAmount() >= 0) {
+        if (passwordConfig.isNumbers()) {
             charsList.add(NUMBER);
         }
-        if (passwordConfig.getCharacters().getAmount() >= 0) {
+        if (passwordConfig.isSymbols()) {
             charsList.add(ANYSYMBOL);
         }
         char currentChar;
@@ -63,7 +62,7 @@ public class SchemeGenerator {
                 scheme.add(currentChar);
                 i++;
             } catch (NullPointerException e) {
-                System.out.println("Received " + i + " as a selection value");
+                System.err.println("Received " + i + " as a selection value");
                 e.printStackTrace();
             }
         }
@@ -75,15 +74,15 @@ public class SchemeGenerator {
         Map<Integer, Character> map = new HashMap<>();
 
 //        map amount of types to scheme letters
-        map.put(passwordConfig.getNumbers().amount, NUMBER);
-        char symbols = passwordConfig.isCharStandard() ? ANYSYMBOL : SYMBOL;
-        map.put(passwordConfig.getCharacters().amount, symbols);
-        if (passwordConfig.getLowerCase().amount == 0 && passwordConfig.getUpperCase().amount == 0) {
-            map.put(passwordConfig.getLowerCase().amount, LOWERCASE);
-            map.put(passwordConfig.getUpperCase().amount, UPPERCASE);
-        } else {
-            map.put(passwordConfig.getLength() - map.size(), LETTER);
-        }
+//        map.put(passwordConfig.getNumbers().amount, NUMBER);
+//        char symbols = passwordConfig.isCharStandard() ? ANYSYMBOL : SYMBOL;
+//        map.put(passwordConfig.getCharacters().amount, symbols);
+//        if (passwordConfig.getLowerCase().amount == 0 && passwordConfig.getUpperCase().amount == 0) {
+//            map.put(passwordConfig.getLowerCase().amount, LOWERCASE);
+//            map.put(passwordConfig.getUpperCase().amount, UPPERCASE);
+//        } else {
+//            map.put(passwordConfig.getLength() - map.size(), LETTER);
+//        }
 
 //        add lists of individual scheme letters to master list
         pattern = new ArrayList<>(concatSchemeLists(map));

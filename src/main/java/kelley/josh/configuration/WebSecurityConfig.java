@@ -49,7 +49,7 @@ public class WebSecurityConfig extends ResourceServerConfigurerAdapter {
 
     @Bean
     public FilterRegistrationBean corsFilter() {
-        System.out.println("cors filter");
+        System.out.println("cors filter" + origin);
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
@@ -85,7 +85,10 @@ public class WebSecurityConfig extends ResourceServerConfigurerAdapter {
         httpSecurity
 //                allows user endpoint usage for all
 //                .authorizeRequests().antMatchers("/user").permitAll().and()
-                .authorizeRequests().anyRequest().hasRole("USER");
+                .authorizeRequests().anyRequest().hasRole("USER")
+//                .and().authorizeRequests().antMatchers(HttpMethod.POST,"/user/add").permitAll();
+                .and().authorizeRequests().antMatchers(HttpMethod.POST,"/user/add").anonymous().anyRequest().permitAll();
+//        httpSecurity.
 //        httpSecurity.httpBasic();
         httpSecurity.csrf().disable();
     }
